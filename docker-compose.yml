@@ -1,0 +1,56 @@
+version: "3.3"
+services:
+  screeps-server:
+    build:
+      context: ./screeps-server
+      dockerfile: Dockerfile
+      args:
+        screeps_version: 3.3.0
+        node_version: node:8-alpine
+    image: ika108/screeps-server:latest
+    command: run
+    container_name: screeps-server
+    depends_on:
+      - mongodb
+      - redis
+    ports:
+      - 21025:21025
+      - 21026:21026
+    networks:
+      - backend
+    hostname: server-screeps
+    volumes:
+      - screeps_data:/screeps
+    restart: on-failure
+    env_file:
+     - .env
+  mongodb:
+    image: mongo:latest
+    container_name: screeps-db
+    command: --quiet
+    ports:
+      - 27017
+    networks:
+      - backend
+    hostname: mongo-screeps
+    volumes:
+      - mongo_data:/data/db
+    restart: on-failure
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes
+    container_name: screeps-cache
+    ports:
+      - 6379
+    networks:
+      - backend
+    hostname: redis-screeps
+    volumes:
+      - redis_data:/data
+    restart: on-failure
+volumes:
+  screeps_data:
+  mongo_data:
+  redis_data:
+networks:
+  backend:
