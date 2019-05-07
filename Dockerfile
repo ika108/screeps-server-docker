@@ -1,6 +1,4 @@
-ARG node_version
-FROM $node_version
-ARG screeps_version
+FROM node:8-alpine
 
 WORKDIR /screeps
 
@@ -8,7 +6,7 @@ RUN apk update; apk add python2 build-base
 
 RUN yarn init -y
 
-RUN yarn add screeps@$screeps_version
+RUN yarn add screeps@3.4.3
 RUN yarn add screepsmod-tickrate
 RUN yarn add screepsmod-admin-utils
 
@@ -21,7 +19,7 @@ COPY mods.json /screeps/mods.json
 
 RUN sed -e "s/password =/password = SCREEPS_PWD/" -i .screepsrc
 
-FROM $node_version
+FROM node:8-alpine
 
 WORKDIR /screeps
 
