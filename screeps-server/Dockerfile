@@ -10,7 +10,6 @@ RUN yarn init -y
 
 RUN yarn add screeps@$screeps_version
 RUN yarn add screepsmod-tickrate
-RUN yarn add screepsmod-mongo
 RUN yarn add screepsmod-admin-utils
 
 
@@ -21,10 +20,6 @@ RUN rm -rf /screeps/mods.json
 COPY mods.json /screeps/mods.json
 
 RUN sed -e "s/password =/password = SCREEPS_PWD/" -i .screepsrc
-
-RUN echo -e "\n[mongo]\nhost = screeps-db\nport = 27017\n\n[redis]\nhost = screeps-cache\nport = 6379\n" >> /screeps/.screepsrc
-
-#COPY archives/db.json /screeps/db.json
 
 FROM $node_version
 
