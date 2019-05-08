@@ -10,8 +10,6 @@ RUN yarn add screeps@3.4.3
 RUN yarn add screepsmod-tickrate
 RUN yarn add screepsmod-admin-utils
 
-
-# Random token to make npx happy
 RUN echo STEAM_TOKEN | npx screeps init
 
 RUN rm -rf /screeps/mods.json

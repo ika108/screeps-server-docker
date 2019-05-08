@@ -6,7 +6,6 @@ function run_srv(){
   cd /screeps
   sed -e "s/STEAM_TOKEN/${STEAM_TOKEN}/" -i .screepsrc
   sed -e "s/password = SCREEPS_PWD/password = ${SCREEPS_PWD}/" -i .screepsrc
-  #cat .screepsrc | envsubst | sponge .screepsrc
   echo "-- Starting npx --"
   npx screeps start & sleep 5
   echo "-- Setting tick_rate to ${TICK_RATE} --"
@@ -23,7 +22,6 @@ function init_srv(){
   sed -e "s/STEAM_TOKEN/${STEAM_TOKEN}/" -i .screepsrc
   sed -e "s/password = SCREEPS_PWD/password = ${SCREEPS_PWD}/" -i .screepsrc
   npx screeps start & sleep 5
-#  echo -n "mongo.importDB();" | nc localhost 21026
   echo -n "system.resetAllData();" | nc localhost 21026
   echo -n "setTickRate($TICK_RATE);" | nc localhost 21026
   echo -n "map.updateTerrainData();" | nc localhost 21026
