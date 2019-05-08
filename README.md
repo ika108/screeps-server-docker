@@ -1,5 +1,6 @@
 # screeps-server-docker
-This a Docker image for a stand-alone Screeps server.
+This a Docker image for a stand-alone Screeps server 3.4.3.
+
 
 [![Screeps logo](https://github.com/screeps/screeps/raw/master/logo.png "Screeps logo")](https://screeps.com/)
 
